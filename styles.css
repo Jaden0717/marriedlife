@@ -1,0 +1,465 @@
+
+
+/* ---------- GLOBAL RESET & BODY ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(145deg, #fffaf5 0%, #feefe6 100%);
+  font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', 'Inter', sans-serif;
+  color: #2c1e17;
+  padding: 1.8rem 1.5rem;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+}
+
+/* main app container */
+.love-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ========== HEADER + ROMANTIC DECORATIONS ========== */
+.romance-header {
+  text-align: center;
+  margin-bottom: 2.8rem;
+  position: relative;
+}
+
+.heart-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.heart-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 2px 6px rgba(197, 108, 78, 0.3));
+  animation: gentlePulse 2s infinite ease-in-out;
+}
+
+@keyframes gentlePulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.romance-header h1 {
+  font-size: 2.7rem;
+  background: linear-gradient(125deg, #c4684a, #e58866, #f0a787);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: -0.3px;
+  font-weight: 700;
+  text-shadow: 0 2px 5px rgba(255, 215, 190, 0.5);
+}
+
+.tagline {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #c48264;
+  background: rgba(255, 245, 235, 0.7);
+  display: inline-block;
+  padding: 0.3rem 1.5rem;
+  border-radius: 60px;
+  backdrop-filter: blur(3px);
+  margin-top: 0.6rem;
+  letter-spacing: 0.3px;
+}
+
+/* ========== UPLOAD CARD (GLASS + WARM) ========== */
+.upload-memory-card {
+  background: rgba(255, 250, 245, 0.92);
+  backdrop-filter: blur(4px);
+  border-radius: 2rem;
+  box-shadow: 0 25px 40px -16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(250, 200, 170, 0.4);
+  padding: 1.6rem 2rem;
+  margin-bottom: 3rem;
+  transition: all 0.25s ease;
+}
+
+.upload-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.photo-selector {
+  background: #fff4ec;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  border: 2px dashed #e3b59b;
+  transition: 0.2s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #b56443;
+  font-size: 0.95rem;
+}
+
+.photo-selector:hover {
+  background: #ffe2d4;
+  border-color: #ce8464;
+  transform: translateY(-1px);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.preview-thumbnail {
+  width: 70px;
+  height: 70px;
+  background: #fbe6da;
+  border-radius: 22px;
+  object-fit: cover;
+  border: 2px solid #ffcfb5;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  transition: 0.2s;
+}
+
+.memory-caption-field {
+  flex: 2;
+  min-width: 200px;
+}
+
+.memory-caption-field input {
+  width: 100%;
+  padding: 0.85rem 1.4rem;
+  border: none;
+  background: #ffffffea;
+  border-radius: 70px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #3f2a1e;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), inset 0 0 0 1px #f3cfbb;
+  transition: 0.2s;
+}
+
+.memory-caption-field input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffbe9e66, inset 0 0 0 1px #dd9a7a;
+  background: white;
+}
+
+.memory-caption-field input::placeholder {
+  color: #cfaa95;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.btn-love-upload {
+  background: #e4815f;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  transition: 0.2s;
+  box-shadow: 0 8px 18px rgba(214, 105, 65, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-love-upload:hover {
+  background: #cf6847;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(200, 90, 50, 0.25);
+}
+
+.btn-love-upload:active {
+  transform: translateY(1px);
+}
+
+.info-note {
+  font-size: 0.7rem;
+  text-align: center;
+  margin-top: 1rem;
+  color: #c59379;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ========== GALLERY HEADER ========== */
+.gallery-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 3px dotted #ffd9c6;
+}
+
+.gallery-head h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  background: linear-gradient(120deg, #a3573b, #cc7c5c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: -0.2px;
+}
+
+.counter-badge {
+  background: #ffede3;
+  padding: 0.35rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #bc7659;
+  box-shadow: inset 0 0 0 1px #ffd5be;
+}
+
+/* ========== MEMORY GRID (RESPONSIVE, WARM) ========== */
+.memories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.8rem;
+}
+
+/* memory card styles */
+.memory-card {
+  background: white;
+  border-radius: 1.8rem;
+  overflow: hidden;
+  box-shadow: 0 16px 28px -12px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+  border: 1px solid #fff0e5;
+  backdrop-filter: blur(0px);
+}
+
+.memory-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 34px -14px rgba(102, 51, 30, 0.2);
+  border-color: #ffe0cf;
+}
+
+.card-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #faeadf;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.memory-card:hover .card-image {
+  transform: scale(1.02);
+}
+
+.card-content {
+  padding: 1rem 1.2rem 1.2rem;
+  background: #fffcf9;
+}
+
+.memory-caption {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #543a2b;
+  word-break: break-word;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.memory-caption:before {
+  content: "📎";
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.memory-date {
+  font-size: 0.7rem;
+  color: #be8d73;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0.4rem 0 0.8rem 0;
+  letter-spacing: 0.2px;
+}
+
+.delete-memory {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ce9278;
+  cursor: pointer;
+  padding: 0.3rem 0.8rem;
+  border-radius: 40px;
+  transition: 0.15s;
+  background: #fff1e9;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.delete-memory:hover {
+  background: #ffded0;
+  color: #bc5d39;
+  transform: scale(0.98);
+}
+
+/* empty state with love */
+.empty-grace {
+  grid-column: 1 / -1;
+  text-align: center;
+  background: #fff7f0;
+  border-radius: 2.4rem;
+  padding: 3rem;
+  color: #c79273;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: 2px dashed #ffd2bc;
+}
+
+/* footer romantic */
+.footer-love {
+  text-align: center;
+  margin-top: 3.8rem;
+  font-size: 0.75rem;
+  color: #cfab95;
+  border-top: 2px solid #ffeadc;
+  padding-top: 1.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* floating toast (custom notifications) */
+.romantic-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e27c5ce6;
+  backdrop-filter: blur(12px);
+  color: white;
+  padding: 0.7rem 1.6rem;
+  border-radius: 60px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  font-family: monospace;
+  letter-spacing: 0.4px;
+  animation: fadeSlideUp 0.2s ease;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ========== RESPONSIVE DESIGN (MOBILE FIRST LOVE) ========== */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  .romance-header h1 {
+    font-size: 2rem;
+  }
+  .heart-icon {
+    font-size: 1.4rem;
+  }
+  .tagline {
+    font-size: 0.85rem;
+  }
+  .upload-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-love-upload {
+    justify-content: center;
+  }
+  .gallery-head h2 {
+    font-size: 1.5rem;
+  }
+  .counter-badge {
+    font-size: 0.75rem;
+  }
+  .memory-caption {
+    font-size: 0.95rem;
+  }
+  .memories-grid {
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  .upload-memory-card {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .memories-grid {
+    grid-template-columns: 1fr;
+  }
+  .card-content {
+    padding: 0.8rem;
+  }
+  .romance-header h1 {
+    font-size: 1.8rem;
+  }
+  .heart-divider {
+    gap: 0.4rem;
+  }
+  .footer-love {
+    font-size: 0.65rem;
+  }
+}
+
+/* optional smooth scroll & selection */
+::selection {
+  background: #fadbcb;
+  color: #8b4d32;
+}
+
+/* subtle image loading effect */
+.card-image {
+  background: #f7e3d8;
+}
+
+/* button focus accessibility */
+.btn-love-upload:focus-visible,
+.photo-selector:focus-visible,
+.delete-memory:focus-visible {
+  outline: 3px solid #e4815f;
+  outline-offset: 2px;
+}
+
+/* hover glow for upload card */
+.upload-memory-card:hover {
+  box-shadow: 0 28px 40px -18px rgba(0, 0, 0, 0.15);
+}
+
+/* memory date icon */
+.memory-date span {
+  opacity: 0.8;
+}
