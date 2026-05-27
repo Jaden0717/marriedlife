@@ -26,5 +26,9 @@ const messageRef = ref(db, "message");
 onValue(messageRef, (snapshot) => {
   const data = snapshot.val();
 
-  document.getElementById("message").innerText = data;
+  const messageDiv = document.getElementById("message");
+
+  if (messageDiv) {
+    messageDiv.innerText = data;
+  }
 });
