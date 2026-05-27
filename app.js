@@ -1,14 +1,15 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import {
+  getDatabase,
+  ref,
+  onValue
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyB9Xar88NBCkcXcbhIhMD4fRzVxHFxLnC8",
   authDomain: "marriedlife-aa033.firebaseapp.com",
+  databaseURL: "https://marriedlife-aa033-default-rtdb.firebaseio.com",
   projectId: "marriedlife-aa033",
   storageBucket: "marriedlife-aa033.firebasestorage.app",
   messagingSenderId: "976292627031",
@@ -16,6 +17,14 @@ const firebaseConfig = {
   measurementId: "G-GT58WHT2PQ"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+const db = getDatabase(app);
+
+const messageRef = ref(db, "message");
+
+onValue(messageRef, (snapshot) => {
+  const data = snapshot.val();
+
+  document.getElementById("message").innerText = data;
+});
