@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Our Memory Lane ✨ – Couple's Photo Gallery</title>
   <style>
+    /* ---------- CSS RESET & GLOBAL ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -12,58 +13,84 @@
     }
 
     body {
-      background: linear-gradient(145deg, #fef9f0 0%, #fff4e6 100%);
-      font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', sans-serif;
-      padding: 2rem 1.5rem;
-      color: #2e241f;
+      background: linear-gradient(145deg, #fffaf5 0%, #feefe6 100%);
+      font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', 'Inter', sans-serif;
+      color: #2c1e17;
+      padding: 1.8rem 1.5rem;
+      scroll-behavior: smooth;
+      min-height: 100vh;
     }
 
-    /* main container */
-    .app-container {
-      max-width: 1400px;
+    /* main app container */
+    .love-container {
+      max-width: 1300px;
       margin: 0 auto;
-    }
-
-    /* header + romantic touch */
-    .header {
-      text-align: center;
-      margin-bottom: 2.5rem;
       position: relative;
     }
 
-    .header h1 {
-      font-size: 2.8rem;
-      background: linear-gradient(135deg, #c45c4a, #e68a6e);
+    /* ========== HEADER + ROMANTIC DECORATIONS ========== */
+    .romance-header {
+      text-align: center;
+      margin-bottom: 2.8rem;
+      position: relative;
+    }
+
+    .heart-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .heart-icon {
+      font-size: 1.8rem;
+      filter: drop-shadow(0 2px 6px rgba(197, 108, 78, 0.3));
+      animation: gentlePulse 2s infinite ease-in-out;
+    }
+
+    @keyframes gentlePulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    .romance-header h1 {
+      font-size: 2.7rem;
+      background: linear-gradient(125deg, #c4684a, #e58866, #f0a787);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.5px;
-      display: inline-block;
-      padding: 0 0.5rem;
+      letter-spacing: -0.3px;
+      font-weight: 700;
+      text-shadow: 0 2px 5px rgba(255, 215, 190, 0.5);
     }
 
-    .sub {
-      font-size: 1.1rem;
-      color: #b8725a;
-      margin-top: 0.5rem;
+    .tagline {
+      font-size: 1rem;
       font-weight: 500;
-      border-top: 2px solid #ffd9c4;
+      color: #c48264;
+      background: rgba(255, 245, 235, 0.7);
       display: inline-block;
-      padding-top: 0.6rem;
+      padding: 0.3rem 1.5rem;
+      border-radius: 60px;
+      backdrop-filter: blur(3px);
+      margin-top: 0.6rem;
+      letter-spacing: 0.3px;
     }
 
-    /* upload card */
-    .upload-card {
-      background: rgba(255, 250, 240, 0.9);
-      backdrop-filter: blur(2px);
+    /* ========== UPLOAD CARD (GLASS + WARM) ========== */
+    .upload-memory-card {
+      background: rgba(255, 250, 245, 0.92);
+      backdrop-filter: blur(4px);
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(253, 216, 188, 0.5);
-      padding: 1.5rem 2rem;
-      margin-bottom: 2.8rem;
-      transition: all 0.2s;
+      box-shadow: 0 25px 40px -16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(250, 200, 170, 0.4);
+      padding: 1.6rem 2rem;
+      margin-bottom: 3rem;
+      transition: all 0.25s ease;
     }
 
-    .upload-area {
+    .upload-flex {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end;
@@ -71,255 +98,422 @@
       justify-content: center;
     }
 
-    .file-label {
-      background: #ffe7db;
-      border: 2px dashed #d98e6e;
+    .photo-selector {
+      background: #fff4ec;
       border-radius: 2rem;
-      padding: 0.7rem 1.8rem;
-      font-weight: 600;
-      color: #b45a3e;
-      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border: 2px dashed #e3b59b;
       transition: 0.2s;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      font-weight: 600;
+      color: #b56443;
+      font-size: 0.95rem;
     }
 
-    .file-label:hover {
-      background: #ffd9c7;
-      border-color: #c16e4e;
+    .photo-selector:hover {
+      background: #ffe2d4;
+      border-color: #ce8464;
+      transform: translateY(-1px);
     }
 
     input[type="file"] {
       display: none;
     }
 
-    .photo-preview {
+    .preview-thumbnail {
       width: 70px;
       height: 70px;
-      background: #f6e2d4;
-      border-radius: 20px;
+      background: #fbe6da;
+      border-radius: 22px;
       object-fit: cover;
-      border: 2px solid #ffccb3;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-
-    .caption-input {
-      flex: 2;
-      min-width: 180px;
-    }
-
-    .caption-input input {
-      width: 100%;
-      padding: 0.8rem 1.2rem;
-      border: none;
-      background: #fff9f3;
-      border-radius: 60px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05), inset 0 0 0 1px #f0cfbc;
+      border: 2px solid #ffcfb5;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
       transition: 0.2s;
     }
 
-    .caption-input input:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px #ffb48a66, inset 0 0 0 1px #dd977b;
+    .memory-caption-field {
+      flex: 2;
+      min-width: 200px;
     }
 
-    .btn-upload {
-      background: #e27c5c;
+    .memory-caption-field input {
+      width: 100%;
+      padding: 0.85rem 1.4rem;
+      border: none;
+      background: #ffffffea;
+      border-radius: 70px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      font-weight: 500;
+      color: #3f2a1e;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), inset 0 0 0 1px #f3cfbb;
+      transition: 0.2s;
+    }
+
+    .memory-caption-field input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px #ffbe9e66, inset 0 0 0 1px #dd9a7a;
+      background: white;
+    }
+
+    .memory-caption-field input::placeholder {
+      color: #cfaa95;
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    .btn-love-upload {
+      background: #e4815f;
       border: none;
       padding: 0.8rem 2rem;
-      border-radius: 40px;
+      border-radius: 50px;
       font-weight: 700;
       font-size: 1rem;
       color: white;
       cursor: pointer;
       font-family: inherit;
       transition: 0.2s;
-      box-shadow: 0 6px 14px rgba(210, 105, 70, 0.25);
+      box-shadow: 0 8px 18px rgba(214, 105, 65, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .btn-upload:hover {
-      background: #cc6242;
-      transform: scale(0.97);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    .btn-love-upload:hover {
+      background: #cf6847;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(200, 90, 50, 0.25);
     }
 
-    /* gallery grid */
-    .gallery-header {
+    .btn-love-upload:active {
+      transform: translateY(1px);
+    }
+
+    .info-note {
+      font-size: 0.7rem;
+      text-align: center;
+      margin-top: 1rem;
+      color: #c59379;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* ========== GALLERY HEADER ========== */
+    .gallery-head {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
-      margin-bottom: 1.2rem;
-      border-bottom: 2px solid #ffdecb;
-      padding-bottom: 0.8rem;
+      margin-bottom: 1.6rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 3px dotted #ffd9c6;
     }
 
-    .gallery-header h2 {
+    .gallery-head h2 {
+      font-size: 1.8rem;
       font-weight: 600;
-      font-size: 1.7rem;
-      color: #965a42;
+      background: linear-gradient(120deg, #a3573b, #cc7c5c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.2px;
     }
 
-    .photo-count {
-      background: #f2dbcf;
-      padding: 0.3rem 1rem;
-      border-radius: 60px;
+    .counter-badge {
+      background: #ffede3;
+      padding: 0.35rem 1.2rem;
+      border-radius: 100px;
       font-size: 0.85rem;
-      font-weight: 500;
-      color: #7c4f3a;
+      font-weight: 600;
+      color: #bc7659;
+      box-shadow: inset 0 0 0 1px #ffd5be;
     }
 
-    .gallery-grid {
+    /* ========== MEMORY GRID (RESPONSIVE, WARM) ========== */
+    .memories-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1.8rem;
     }
 
-    /* memory card */
+    /* memory card styles */
     .memory-card {
       background: white;
-      border-radius: 1.5rem;
+      border-radius: 1.8rem;
       overflow: hidden;
-      box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s ease, box-shadow 0.2s;
+      box-shadow: 0 16px 28px -12px rgba(0, 0, 0, 0.1);
+      transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+      border: 1px solid #fff0e5;
       backdrop-filter: blur(0px);
-      border: 1px solid #ffefe3;
     }
 
     .memory-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 28px 34px -14px rgba(102, 51, 30, 0.2);
+      border-color: #ffe0cf;
     }
 
-    .card-img {
+    .card-image {
       width: 100%;
       aspect-ratio: 1 / 1;
       object-fit: cover;
-      background: #f9e4d8;
-      transition: 0.2s;
+      background: #faeadf;
+      transition: transform 0.4s ease;
       display: block;
     }
 
-    .card-info {
+    .memory-card:hover .card-image {
+      transform: scale(1.02);
+    }
+
+    .card-content {
       padding: 1rem 1.2rem 1.2rem;
-      background: #ffffffd9;
+      background: #fffcf9;
     }
 
-    .card-caption {
-      font-weight: 600;
-      font-size: 1rem;
-      color: #4d3527;
+    .memory-caption {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #543a2b;
       word-break: break-word;
-      margin-bottom: 0.4rem;
-    }
-
-    .timestamp {
-      font-size: 0.7rem;
-      color: #b18a74;
-      letter-spacing: 0.3px;
+      margin-bottom: 0.3rem;
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-bottom: 0.8rem;
     }
 
-    .btn-delete {
+    .memory-caption:before {
+      content: "📎";
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .memory-date {
+      font-size: 0.7rem;
+      color: #be8d73;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0.4rem 0 0.8rem 0;
+      letter-spacing: 0.2px;
+    }
+
+    .delete-memory {
       background: none;
       border: none;
-      color: #cf8f74;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
+      color: #ce9278;
       cursor: pointer;
-      padding: 0.3rem 0.6rem;
+      padding: 0.3rem 0.8rem;
       border-radius: 40px;
-      transition: 0.1s;
+      transition: 0.15s;
+      background: #fff1e9;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      background: #fff2ea;
     }
 
-    .btn-delete:hover {
-      background: #ffe1d1;
-      color: #bc5f3c;
+    .delete-memory:hover {
+      background: #ffded0;
+      color: #bc5d39;
+      transform: scale(0.98);
     }
 
-    /* empty state */
-    .empty-message {
-      text-align: center;
+    /* empty state with love */
+    .empty-grace {
       grid-column: 1 / -1;
-      background: #fff3ec;
-      border-radius: 2rem;
-      padding: 3rem;
-      color: #b48468;
-      font-size: 1.1rem;
-    }
-
-    /* footer */
-    .footer-note {
       text-align: center;
-      margin-top: 3.5rem;
-      font-size: 0.8rem;
-      color: #cbae99;
-      border-top: 1px solid #fadbcb;
-      padding-top: 2rem;
+      background: #fff7f0;
+      border-radius: 2.4rem;
+      padding: 3rem;
+      color: #c79273;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border: 2px dashed #ffd2bc;
     }
 
-    button {
-      background: none;
-      border: none;
-    }
-
-    /* utils */
-    .flex-row {
+    /* footer romantic */
+    .footer-love {
+      text-align: center;
+      margin-top: 3.8rem;
+      font-size: 0.75rem;
+      color: #cfab95;
+      border-top: 2px solid #ffeadc;
+      padding-top: 1.8rem;
       display: flex;
-      align-items: center;
+      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
+    }
+
+    /* floating toast (custom notifications) */
+    .romantic-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #e27c5ce6;
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      z-index: 1000;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      pointer-events: none;
+      font-family: monospace;
+      letter-spacing: 0.4px;
+      animation: fadeSlideUp 0.2s ease;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* ========== RESPONSIVE DESIGN (MOBILE FIRST LOVE) ========== */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      .romance-header h1 {
+        font-size: 2rem;
+      }
+      .heart-icon {
+        font-size: 1.4rem;
+      }
+      .tagline {
+        font-size: 0.85rem;
+      }
+      .upload-flex {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-love-upload {
+        justify-content: center;
+      }
+      .gallery-head h2 {
+        font-size: 1.5rem;
+      }
+      .counter-badge {
+        font-size: 0.75rem;
+      }
+      .memory-caption {
+        font-size: 0.95rem;
+      }
+      .memories-grid {
+        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      .upload-memory-card {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .memories-grid {
+        grid-template-columns: 1fr;
+      }
+      .card-content {
+        padding: 0.8rem;
+      }
+      .romance-header h1 {
+        font-size: 1.8rem;
+      }
+      .heart-divider {
+        gap: 0.4rem;
+      }
+      .footer-love {
+        font-size: 0.65rem;
+      }
+    }
+
+    /* optional smooth scroll & selection */
+    ::selection {
+      background: #fadbcb;
+      color: #8b4d32;
+    }
+
+    /* subtle image loading effect */
+    .card-image {
+      background: #f7e3d8;
+    }
+
+    /* button focus accessibility */
+    .btn-love-upload:focus-visible,
+    .photo-selector:focus-visible,
+    .delete-memory:focus-visible {
+      outline: 3px solid #e4815f;
+      outline-offset: 2px;
+    }
+
+    /* hover glow for upload card */
+    .upload-memory-card:hover {
+      box-shadow: 0 28px 40px -18px rgba(0, 0, 0, 0.15);
+    }
+
+    /* memory date icon */
+    .memory-date span {
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
-<div class="app-container">
-  <div class="header">
-    <h1>📸 our little universe</h1>
-    <div class="sub">where every photo becomes a forever memory</div>
+<div class="love-container">
+  <div class="romance-header">
+    <div class="heart-divider">
+      <span class="heart-icon">💗</span>
+      <span class="heart-icon">🌸</span>
+      <span class="heart-icon">💗</span>
+    </div>
+    <h1>our little universe</h1>
+    <div class="tagline">✧ every photo becomes a forever memory ✧</div>
   </div>
 
-  <!-- Upload section -->
-  <div class="upload-card">
-    <div class="upload-area">
-      <label class="file-label">
+  <!-- Upload section with romantic styling -->
+  <div class="upload-memory-card">
+    <div class="upload-flex">
+      <label class="photo-selector">
         📷 choose photo
         <input type="file" id="imageUploadInput" accept="image/jpeg,image/png,image/jpg,image/webp">
       </label>
       <div id="previewThumb" style="display: flex; align-items: center;"></div>
-      <div class="caption-input">
+      <div class="memory-caption-field">
         <input type="text" id="photoCaption" placeholder="write a little memory... ✨" autocomplete="off">
       </div>
-      <button class="btn-upload" id="uploadBtn">💾 save moment</button>
+      <button class="btn-love-upload" id="uploadBtn">💾 save moment</button>
     </div>
-    <div style="font-size: 0.75rem; margin-top: 12px; text-align: center; color: #bb8b72;">
-      ⭐ our private gallery — photos stay in your browser (local storage)
+    <div class="info-note">
+      <span>⭐ our private gallery — photos live in your heart & browser (local storage)</span>
     </div>
   </div>
 
   <!-- Gallery header + counter -->
-  <div class="gallery-header">
+  <div class="gallery-head">
     <h2>💞 our memories</h2>
-    <div class="photo-count" id="photoCounter">0 memories</div>
+    <div class="counter-badge" id="photoCounter">0 memories</div>
   </div>
 
   <!-- dynamic gallery grid -->
-  <div class="gallery-grid" id="galleryGrid">
-    <!-- cards will be injected here via JS -->
-    <div class="empty-message">✨ no memories yet — upload your first photo together ✨</div>
+  <div class="memories-grid" id="galleryGrid">
+    <div class="empty-grace">✨ no memories yet — upload your first photo together ✨</div>
   </div>
-  <div class="footer-note">
-    💖 every upload lives here forever — just for the two of us
+
+  <div class="footer-love">
+    <span>💖 every upload lives here forever — just for the two of us</span>
+    <span>✦ stored with love in your browser ✦</span>
   </div>
 </div>
 
@@ -352,11 +546,6 @@
         }
       } catch(e) { memoriesArray = []; }
     } else {
-      // initial demo memories? optional but we can keep empty. 
-      // I'll add 2 sweet examples? no, better to keep clean, but i can add 2 optional demo images? 
-      // But to respect "girlfriend upload together" we start empty. But for demonstration?
-      // I'll add placeholder text only, but won't push any image without consent. 
-      // However we can include two soft examples with emoji? Not needed. keep empty.
       memoriesArray = [];
     }
     renderGallery();
@@ -378,7 +567,7 @@
   function renderGallery() {
     if (!galleryGrid) return;
     if (!memoriesArray.length) {
-      galleryGrid.innerHTML = `<div class="empty-message">🌸 no memories yet — upload your first photo together 🌸</div>`;
+      galleryGrid.innerHTML = `<div class="empty-grace">🌸 no memories yet — upload your first photo together 🌸</div>`;
       photoCounterSpan.innerText = `0 memories`;
       return;
     }
@@ -391,13 +580,13 @@
       const formattedTime = formatDate(mem.timestamp);
       cardsHtml += `
         <div class="memory-card" data-id="${mem.id}">
-          <img class="card-img" src="${mem.imageDataUrl}" alt="memory photo" loading="lazy">
-          <div class="card-info">
-            <div class="card-caption">${safeCaption}</div>
-            <div class="timestamp">
+          <img class="card-image" src="${mem.imageDataUrl}" alt="memory photo" loading="lazy">
+          <div class="card-content">
+            <div class="memory-caption">${safeCaption}</div>
+            <div class="memory-date">
               <span>🕊️</span> ${formattedTime}
             </div>
-            <button class="btn-delete" data-id="${mem.id}">
+            <button class="delete-memory" data-id="${mem.id}">
               🧡 remove memory
             </button>
           </div>
@@ -408,7 +597,7 @@
     photoCounterSpan.innerText = `${memoriesArray.length} ${memoriesArray.length === 1 ? 'memory' : 'memories'}`;
 
     // attach delete events dynamically
-    document.querySelectorAll('.btn-delete').forEach(btn => {
+    document.querySelectorAll('.delete-memory').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-id');
@@ -437,30 +626,17 @@
     memoriesArray = newMemories;
     persistMemories();
     renderGallery();
-    // also clear any preview if something? no need
     showTemporaryMessage("🗑️ memory removed", "#c46a4a");
   }
 
   // small floating/toast msg
   function showTemporaryMessage(msg, bgColor = "#d98967") {
-    let toast = document.querySelector('.custom-toast-msg');
+    let toast = document.querySelector('.romantic-toast');
     if(toast) toast.remove();
     const div = document.createElement('div');
-    div.className = 'custom-toast-msg';
+    div.className = 'romantic-toast';
     div.innerText = msg;
-    div.style.position = 'fixed';
-    div.style.bottom = '20px';
-    div.style.left = '50%';
-    div.style.transform = 'translateX(-50%)';
     div.style.backgroundColor = bgColor;
-    div.style.color = 'white';
-    div.style.padding = '10px 20px';
-    div.style.borderRadius = '50px';
-    div.style.fontWeight = '500';
-    div.style.fontSize = '0.9rem';
-    div.style.zIndex = '999';
-    div.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
-    div.style.backdropFilter = 'blur(4px)';
     document.body.appendChild(div);
     setTimeout(() => { if(div) div.remove(); }, 2200);
   }
@@ -478,7 +654,7 @@
       caption: caption.trim() || "💕 our moment",
       timestamp: Date.now()
     };
-    memoriesArray.unshift(newMemory);   // add to start (will be sorted later but unshift gives newest first in array order)
+    memoriesArray.unshift(newMemory);
     persistMemories();
     renderGallery();
     return true;
@@ -487,7 +663,6 @@
   // handle file selection and preview
   function handleFileSelect(file) {
     if (!file) return;
-    // check if image
     if (!file.type.startsWith('image/')) {
       showTemporaryMessage("💔 please select an image (jpg, png, etc)", "#b15e3e");
       return false;
@@ -496,7 +671,6 @@
       showTemporaryMessage("📦 image too large (max 8MB)", "#b15e3e");
       return false;
     }
-    // revoke previous preview URL if exists
     if (currentPreviewUrl) {
       URL.revokeObjectURL(currentPreviewUrl);
       currentPreviewUrl = null;
@@ -505,8 +679,7 @@
     currentPreviewUrl = previewUrl;
     currentFile = file;
 
-    // show thumbnail in preview area
-    previewContainer.innerHTML = `<img class="photo-preview" src="${previewUrl}" alt="preview" style="width:70px; height:70px; border-radius: 20px; object-fit:cover;">`;
+    previewContainer.innerHTML = `<img class="preview-thumbnail" src="${previewUrl}" alt="preview">`;
     return true;
   }
 
@@ -535,19 +708,16 @@
       showTemporaryMessage("✨ first, choose a lovely photo ✨", "#c07a5c");
       return;
     }
-    // actually if currentFile exists use file reader, else if preview but no file? no, we require file object
     if (!currentFile) {
       showTemporaryMessage("📸 select an image file", "#b86b4a");
       return;
     }
     const caption = captionInput.value.trim() === "" ? "💖 a sweet memory" : captionInput.value.trim();
-    // convert to base64 dataURL
     const reader = new FileReader();
     reader.onload = (event) => {
       const dataUrl = event.target.result;
       const success = addNewMemory(dataUrl, caption);
       if (success) {
-        // reset UI after successful upload
         captionInput.value = '';
         resetPreview();
         showTemporaryMessage("🧡 photo saved! forever ours", "#d47a58");
@@ -563,7 +733,6 @@
 
   uploadBtn.addEventListener('click', uploadCurrentPhoto);
 
-  // also optional: pressing enter on caption triggers upload
   captionInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -574,15 +743,15 @@
   // load initial data
   loadFromLocalStorage();
 
-  // handle storage event (if multiple tabs? just for fun)
+  // handle storage event (sync across tabs)
   window.addEventListener('storage', (e) => {
     if (e.key === 'our_love_gallery') {
       loadFromLocalStorage();
-      resetPreview(); // also clear preview if another tab changes anything
+      resetPreview();
     }
   });
 
-  // optional: clear preview if they click on something else (clean)
+  // optional: clear preview before unload
   window.addEventListener('beforeunload', () => {
     if (currentPreviewUrl) {
       URL.revokeObjectURL(currentPreviewUrl);
