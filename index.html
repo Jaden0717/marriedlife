@@ -2,681 +2,285 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Our Memory Lane ✨ – Cloud Sync Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔧 DIAGNOSTIC MODE - Memory Gallery</title>
   <style>
-    /* ---------- ROMANTIC & MODERN CSS (FULLY MERGED) ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: linear-gradient(145deg, #fffaf5 0%, #feefe6 100%);
-      font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', 'Inter', sans-serif;
-      color: #2c1e17;
-      padding: 1.8rem 1.5rem;
-      scroll-behavior: smooth;
-      min-height: 100vh;
-    }
-
-    .love-container {
-      max-width: 1300px;
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 800px;
       margin: 0 auto;
-      position: relative;
     }
-
-    /* ========== HEADER & LOVE DECOR ========== */
-    .romance-header {
-      text-align: center;
-      margin-bottom: 2.8rem;
-      position: relative;
-    }
-
-    .heart-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .heart-icon {
-      font-size: 1.8rem;
-      filter: drop-shadow(0 2px 6px rgba(197, 108, 78, 0.3));
-      animation: gentlePulse 2s infinite ease-in-out;
-    }
-
-    @keyframes gentlePulse {
-      0% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.08); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.8; }
-    }
-
-    .romance-header h1 {
-      font-size: 2.7rem;
-      background: linear-gradient(125deg, #c4684a, #e58866, #f0a787);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: -0.3px;
-      font-weight: 700;
-      text-shadow: 0 2px 5px rgba(255, 215, 190, 0.5);
-    }
-
-    .tagline {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #c48264;
-      background: rgba(255, 245, 235, 0.7);
-      display: inline-block;
-      padding: 0.3rem 1.5rem;
-      border-radius: 60px;
-      backdrop-filter: blur(3px);
-      margin-top: 0.6rem;
-      letter-spacing: 0.3px;
-    }
-
-    /* ========== UPLOAD CARD (GLASS) ========== */
-    .upload-memory-card {
-      background: rgba(255, 250, 245, 0.94);
-      backdrop-filter: blur(4px);
-      border-radius: 2rem;
-      box-shadow: 0 25px 40px -16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(250, 200, 170, 0.4);
-      padding: 1.6rem 2rem;
-      margin-bottom: 3rem;
-      transition: all 0.25s ease;
-    }
-
-    .upload-flex {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      gap: 1.2rem;
-      justify-content: center;
-    }
-
-    .photo-selector {
-      background: #fff4ec;
-      border-radius: 2rem;
-      padding: 0.5rem 1rem;
-      border: 2px dashed #e3b59b;
-      transition: 0.2s;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: #b56443;
-      font-size: 0.95rem;
-    }
-
-    .photo-selector:hover {
-      background: #ffe2d4;
-      border-color: #ce8464;
-      transform: translateY(-1px);
-    }
-
-    input[type="file"] {
-      display: none;
-    }
-
-    .preview-thumbnail {
-      width: 70px;
-      height: 70px;
-      background: #fbe6da;
-      border-radius: 22px;
-      object-fit: cover;
-      border: 2px solid #ffcfb5;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .memory-caption-field {
-      flex: 2;
-      min-width: 200px;
-    }
-
-    .memory-caption-field input {
-      width: 100%;
-      padding: 0.85rem 1.4rem;
-      border: none;
-      background: #ffffffea;
-      border-radius: 70px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      font-weight: 500;
-      color: #3f2a1e;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), inset 0 0 0 1px #f3cfbb;
-      transition: 0.2s;
-    }
-
-    .memory-caption-field input:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px #ffbe9e66, inset 0 0 0 1px #dd9a7a;
+    .card {
       background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-
-    .btn-love-upload {
+    h1 { color: #c4684a; margin-bottom: 1rem; }
+    .status {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+    }
+    .success { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+    .error { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+    .warning { background: #fff3cd; color: #856404; border-left: 4px solid #ffc107; }
+    button {
       background: #e4815f;
+      color: white;
       border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      cursor: pointer;
       font-size: 1rem;
-      color: white;
-      cursor: pointer;
-      font-family: inherit;
-      transition: 0.2s;
-      box-shadow: 0 8px 18px rgba(214, 105, 65, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
-
-    .btn-love-upload:hover {
-      background: #cf6847;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 20px rgba(200, 90, 50, 0.25);
-    }
-
-    .info-note {
-      font-size: 0.7rem;
-      text-align: center;
-      margin-top: 1rem;
-      color: #c59379;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    /* ========== GALLERY HEADER ========== */
-    .gallery-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      flex-wrap: wrap;
-      margin-bottom: 1.6rem;
-      padding-bottom: 0.7rem;
-      border-bottom: 3px dotted #ffd9c6;
-    }
-
-    .gallery-head h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      background: linear-gradient(120deg, #a3573b, #cc7c5c);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: -0.2px;
-    }
-
-    .counter-badge {
-      background: #ffede3;
-      padding: 0.35rem 1.2rem;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #bc7659;
-      box-shadow: inset 0 0 0 1px #ffd5be;
-    }
-
-    /* ========== MEMORY GRID ========== */
-    .memories-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.8rem;
-    }
-
-    .memory-card {
-      background: white;
-      border-radius: 1.8rem;
-      overflow: hidden;
-      box-shadow: 0 16px 28px -12px rgba(0, 0, 0, 0.1);
-      transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
-      border: 1px solid #fff0e5;
-    }
-
-    .memory-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 34px -14px rgba(102, 51, 30, 0.2);
-      border-color: #ffe0cf;
-    }
-
-    .card-image {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      background: #faeadf;
-      transition: transform 0.4s ease;
+    button:disabled { opacity: 0.5; }
+    input, .file-label {
       display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      border-radius: 1rem;
+      border: 1px solid #ddd;
     }
-
-    .memory-card:hover .card-image {
-      transform: scale(1.02);
-    }
-
-    .card-content {
-      padding: 1rem 1.2rem 1.2rem;
-      background: #fffcf9;
-    }
-
-    .memory-caption {
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: #543a2b;
-      word-break: break-word;
-      margin-bottom: 0.3rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .memory-caption:before {
-      content: "📎";
-      font-size: 0.8rem;
-      opacity: 0.7;
-    }
-
-    .memory-date {
-      font-size: 0.7rem;
-      color: #be8d73;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin: 0.4rem 0 0.8rem 0;
-    }
-
-    .delete-memory {
-      background: none;
-      border: none;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #ce9278;
-      cursor: pointer;
-      padding: 0.3rem 0.8rem;
-      border-radius: 40px;
-      background: #fff1e9;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: 0.15s;
-    }
-
-    .delete-memory:hover {
-      background: #ffded0;
-      color: #bc5d39;
-      transform: scale(0.98);
-    }
-
-    .empty-grace {
-      grid-column: 1 / -1;
-      text-align: center;
-      background: #fff7f0;
-      border-radius: 2.4rem;
-      padding: 3rem;
-      color: #c79273;
-      font-size: 1.1rem;
-      font-weight: 500;
-      border: 2px dashed #ffd2bc;
-    }
-
-    .footer-love {
-      text-align: center;
-      margin-top: 3.8rem;
-      font-size: 0.75rem;
-      color: #cfab95;
-      border-top: 2px solid #ffeadc;
-      padding-top: 1.8rem;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* Floating toast */
-    .romantic-toast {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #e27c5ce6;
-      backdrop-filter: blur(12px);
-      color: white;
-      padding: 0.7rem 1.6rem;
-      border-radius: 60px;
-      font-weight: 500;
-      font-size: 0.85rem;
-      z-index: 1000;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      pointer-events: none;
-      animation: fadeSlideUp 0.2s ease;
-    }
-
-    @keyframes fadeSlideUp {
-      from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-    }
-
-    @media (max-width: 768px) {
-      body { padding: 1rem; }
-      .romance-header h1 { font-size: 2rem; }
-      .heart-icon { font-size: 1.4rem; }
-      .upload-flex { flex-direction: column; align-items: stretch; }
-      .btn-love-upload { justify-content: center; }
-      .memories-grid { gap: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-    }
-    @media (max-width: 480px) {
-      .memories-grid { grid-template-columns: 1fr; }
-    }
-    ::selection {
-      background: #fadbcb;
-      color: #8b4d32;
-    }
+    .preview { width: 100px; height: 100px; object-fit: cover; border-radius: 1rem; margin-top: 0.5rem; }
+    hr { margin: 1rem 0; }
   </style>
 </head>
 <body>
-<div class="love-container">
-  <div class="romance-header">
-    <div class="heart-divider">
-      <span class="heart-icon">💗</span>
-      <span class="heart-icon">🌸</span>
-      <span class="heart-icon">💗</span>
-    </div>
-    <h1>our little universe</h1>
-    <div class="tagline">✧ cloud‑synced memories — forever together ✧</div>
+  <h1>🔧 Memory Gallery - Diagnostic Mode</h1>
+  <p>This page will test each part of your Supabase setup and tell you what's wrong.</p>
+
+  <div class="card">
+    <h2>📋 Step 1: Connection Test</h2>
+    <div id="connectionStatus" class="status">Testing connection...</div>
   </div>
 
-  <!-- Upload section -->
-  <div class="upload-memory-card">
-    <div class="upload-flex">
-      <label class="photo-selector">
-        📷 choose photo
-        <input type="file" id="imageUploadInput" accept="image/jpeg,image/png,image/jpg,image/webp">
-      </label>
-      <div id="previewThumb" style="display: flex; align-items: center;"></div>
-      <div class="memory-caption-field">
-        <input type="text" id="photoCaption" placeholder="write a little memory... ✨" autocomplete="off">
-      </div>
-      <button class="btn-love-upload" id="uploadBtn">💾 save moment</button>
-    </div>
-    <div class="info-note">
-      <span>☁️ photos sync across phone, PC, tablet — stored safely in the cloud</span>
-    </div>
+  <div class="card">
+    <h2>📤 Step 2: Upload Test</h2>
+    <label class="file-label">
+      📷 Choose a photo
+      <input type="file" id="testImage" accept="image/*">
+    </label>
+    <div id="previewArea"></div>
+    <input type="text" id="testCaption" placeholder="Caption for this memory" style="width:100%;">
+    <button id="testUploadBtn" disabled>⬆️ Test Upload</button>
+    <div id="uploadResult" class="status" style="margin-top: 1rem;"></div>
   </div>
 
-  <!-- Gallery header + counter -->
-  <div class="gallery-head">
-    <h2>💞 our memories</h2>
-    <div class="counter-badge" id="photoCounter">0 memories</div>
+  <div class="card">
+    <h2>📸 Step 3: Gallery Display</h2>
+    <button id="refreshGalleryBtn">🔄 Refresh Gallery</button>
+    <div id="galleryResult" class="status" style="margin-top: 1rem;">Click refresh to load memories...</div>
   </div>
 
-  <!-- dynamic gallery grid -->
-  <div class="memories-grid" id="galleryGrid">
-    <div class="empty-grace">✨ no memories yet — upload your first photo together ✨</div>
-  </div>
-
-  <div class="footer-love">
-    <span>💖 every upload appears everywhere — just for the two of us</span>
-    <span>✦ powered by supabase realtime cloud ✦</span>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  // ----------------------------- YOUR SUPABASE KEYS (ALREADY CONFIGURED) -----------------------------
-  const SUPABASE_URL = 'https://ukxhoqfqvusoloefnkkj.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVreGhvcWZxdnVzb2xvZWZua2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5NjgyOTgsImV4cCI6MjA5NTU0NDI5OH0.cX4VNJqfxpHEzXiAtgwGzfCWAs3Wpa1P6N2fYZFdQrw';
-  
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  
-  // ---------- DOM elements ----------
-  const fileInput = document.getElementById('imageUploadInput');
-  const captionInput = document.getElementById('photoCaption');
-  const uploadBtn = document.getElementById('uploadBtn');
-  const galleryGrid = document.getElementById('galleryGrid');
-  const photoCounterSpan = document.getElementById('photoCounter');
-  const previewContainer = document.getElementById('previewThumb');
-  
-  let currentPreviewUrl = null;
-  let currentFile = null;
-  
-  // ========== 1. LOAD MEMORIES FROM SUPABASE (sync across all devices) ==========
-  async function loadMemories() {
-    galleryGrid.innerHTML = '<div class="empty-grace">💕 loading your shared memories...</div>';
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // YOUR SUPABASE KEYS
+    const SUPABASE_URL = 'https://ukxhoqfqvusoloefnkkj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVreGhvcWZxdnVzb2xvZWZua2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5NjgyOTgsImV4cCI6MjA5NTU0NDI5OH0.cX4VNJqfxpHEzXiAtgwGzfCWAs3Wpa1P6N2fYZFdQrw';
     
-    try {
-      const { data, error } = await supabase
-        .from('memories_table')
-        .select('*')
-        .order('created_at', { ascending: false });
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    let selectedFile = null;
+    
+    // Helper to add status messages
+    function setStatus(elementId, message, type = 'warning') {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      el.innerHTML = message;
+      el.className = `status ${type}`;
+    }
+    
+    // ========== STEP 1: TEST CONNECTION ==========
+    async function testConnection() {
+      const results = [];
       
-      if (error) throw error;
+      // Test 1: Can we reach Supabase?
+      try {
+        const { data, error } = await supabase.from('memories_table').select('count', { count: 'exact', head: true });
+        if (error) {
+          results.push(`❌ TABLE ERROR: ${error.message}`);
+          results.push(`   → Make sure a table named "memories_table" exists`);
+        } else {
+          results.push(`✅ Table "memories_table" exists and is accessible`);
+        }
+      } catch (e) {
+        results.push(`❌ Cannot connect to Supabase: ${e.message}`);
+      }
       
-      if (!data || data.length === 0) {
-        galleryGrid.innerHTML = '<div class="empty-grace">🌸 no memories yet — upload your first photo together 🌸</div>';
-        photoCounterSpan.innerText = '0 memories';
+      // Test 2: Check Storage bucket
+      try {
+        const { data: buckets, error } = await supabase.storage.listBuckets();
+        if (error) {
+          results.push(`❌ STORAGE ERROR: ${error.message}`);
+        } else {
+          const hasMemories = buckets.some(b => b.name === 'memories');
+          if (hasMemories) {
+            results.push(`✅ Storage bucket "memories" exists`);
+          } else {
+            results.push(`❌ Storage bucket "memories" NOT FOUND. Available buckets: ${buckets.map(b => b.name).join(', ') || 'none'}`);
+            results.push(`   → Go to Supabase Dashboard → Storage → Create bucket named "memories" (make it PUBLIC)`);
+          }
+        }
+      } catch (e) {
+        results.push(`❌ Storage API error: ${e.message}`);
+      }
+      
+      setStatus('connectionStatus', results.join('<br>'), results.some(r => r.includes('❌')) ? 'error' : 'success');
+      return !results.some(r => r.includes('❌'));
+    }
+    
+    // ========== STEP 2: TEST UPLOAD ==========
+    async function testUpload() {
+      if (!selectedFile) {
+        setStatus('uploadResult', '⚠️ Please select a photo first', 'warning');
         return;
       }
       
-      let cardsHtml = '';
-      for (let mem of data) {
-        const safeCaption = escapeHtml(mem.caption) || '💌 untitled memory';
-        const dateObj = new Date(mem.created_at);
-        const formattedTime = dateObj.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) + 
-                              ' at ' + dateObj.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
+      const caption = document.getElementById('testCaption').value.trim() || 'Test memory';
+      const uploadBtn = document.getElementById('testUploadBtn');
+      const resultDiv = 'uploadResult';
+      
+      setStatus(resultDiv, '⏳ Uploading...', 'warning');
+      uploadBtn.disabled = true;
+      
+      try {
+        // Step A: Upload to Storage
+        const fileExt = selectedFile.name.split('.').pop();
+        const fileName = `test_${Date.now()}.${fileExt}`;
+        const filePath = `public/${fileName}`;
         
-        cardsHtml += `
-          <div class="memory-card" data-memory-id="${mem.id}">
-            <img class="card-image" src="${mem.image_url}" alt="memory" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=❤️+image+loading+error'">
-            <div class="card-content">
-              <div class="memory-caption">${safeCaption}</div>
-              <div class="memory-date">🕊️ ${formattedTime}</div>
-              <button class="delete-memory" data-id="${mem.id}">🧡 remove memory</button>
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('memories')
+          .upload(filePath, selectedFile);
+        
+        if (uploadError) {
+          setStatus(resultDiv, `❌ STORAGE UPLOAD FAILED: ${uploadError.message}`, 'error');
+          return;
+        }
+        
+        // Step B: Get public URL
+        const { data: urlData } = supabase.storage.from('memories').getPublicUrl(filePath);
+        const imageUrl = urlData.publicUrl;
+        
+        // Step C: Insert into database
+        const { data: insertData, error: insertError } = await supabase
+          .from('memories_table')
+          .insert([{ image_url: imageUrl, caption: caption }]);
+        
+        if (insertError) {
+          setStatus(resultDiv, `❌ DATABASE INSERT FAILED: ${insertError.message}`, 'error');
+          return;
+        }
+        
+        setStatus(resultDiv, `✅ SUCCESS! Photo uploaded and saved to database!`, 'success');
+        document.getElementById('testCaption').value = '';
+        document.getElementById('previewArea').innerHTML = '';
+        selectedFile = null;
+        document.getElementById('testImage').value = '';
+        
+        // Refresh gallery automatically
+        await loadGallery();
+        
+      } catch (err) {
+        setStatus('uploadResult', `❌ UNEXPECTED ERROR: ${err.message}`, 'error');
+      } finally {
+        uploadBtn.disabled = false;
+      }
+    }
+    
+    // ========== STEP 3: LOAD GALLERY ==========
+    async function loadGallery() {
+      setStatus('galleryResult', 'Loading memories...', 'warning');
+      
+      try {
+        const { data, error } = await supabase
+          .from('memories_table')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (error) {
+          setStatus('galleryResult', `❌ Failed to load: ${error.message}`, 'error');
+          return;
+        }
+        
+        if (!data || data.length === 0) {
+          setStatus('galleryResult', '📭 No memories yet. Upload your first photo!', 'warning');
+          return;
+        }
+        
+        let html = '<div style="display:flex; flex-direction:column; gap:0.75rem;">';
+        for (let mem of data.slice(0, 5)) {  // Show last 5 for preview
+          html += `
+            <div style="border-bottom:1px solid #eee; padding-bottom:0.5rem;">
+              <img src="${mem.image_url}" style="width:60px; height:60px; object-fit:cover; border-radius:10px; margin-right:10px; vertical-align:middle;">
+              <strong>${escapeHtml(mem.caption)}</strong><br>
+              <small>${new Date(mem.created_at).toLocaleString()}</small>
             </div>
-          </div>
-        `;
+          `;
+        }
+        html += '</div>';
+        if (data.length > 5) html += `<p><small>+ ${data.length - 5} more memories</small></p>`;
+        
+        setStatus('galleryResult', html, 'success');
+        
+      } catch (err) {
+        setStatus('galleryResult', `❌ Error: ${err.message}`, 'error');
       }
-      
-      galleryGrid.innerHTML = cardsHtml;
-      const total = data.length;
-      photoCounterSpan.innerText = `${total} ${total === 1 ? 'memory' : 'memories'}`;
-      
-      // Attach delete event to each delete button
-      document.querySelectorAll('.delete-memory').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          e.stopPropagation();
-          const id = btn.getAttribute('data-id');
-          if (id) await deleteMemoryById(id);
-        });
+    }
+    
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
       });
-      
-    } catch (err) {
-      console.error('LOAD ERROR:', err);
-      galleryGrid.innerHTML = `<div class="empty-grace">❌ failed to load memories. <br> check console: ${err.message || 'table or bucket missing?'}</div>`;
-    }
-  }
-  
-  // ========== 2. DELETE MEMORY (removes from cloud) ==========
-  async function deleteMemoryById(id) {
-    try {
-      const { error } = await supabase
-        .from('memories_table')
-        .delete()
-        .eq('id', id);
-      
-      if (error) throw error;
-      
-      showTemporaryMessage("🗑️ memory removed from cloud", "#c46a4a");
-      await loadMemories();   // refresh gallery after deletion
-    } catch (err) {
-      console.error('DELETE ERROR:', err);
-      showTemporaryMessage("❌ couldn't delete", "#c46a4a");
-    }
-  }
-  
-  // ========== 3. UPLOAD PHOTO TO SUPABASE (STORAGE + DATABASE) ==========
-  async function uploadMemory() {
-    if (!currentFile) {
-      showTemporaryMessage("✨ first, choose a lovely photo ✨", "#c07a5c");
-      return;
     }
     
-    const caption = captionInput.value.trim() || "💖 a sweet memory";
-    
-    uploadBtn.disabled = true;
-    uploadBtn.textContent = '☁️ uploading...';
-    showTemporaryMessage("uploading to the cloud...", "#e4815f");
-    
-    try {
-      // 3.1 Upload image to Supabase Storage bucket 'memories'
-      const fileExt = currentFile.name.split('.').pop();
-      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-      const filePath = `public/${fileName}`;
-      
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('memories')
-        .upload(filePath, currentFile, {
-          cacheControl: '3600',
-          upsert: false
-        });
-      
-      if (uploadError) throw uploadError;
-      
-      // 3.2 Get public URL of the uploaded image
-      const { data: urlData } = supabase.storage
-        .from('memories')
-        .getPublicUrl(filePath);
-      
-      const imageUrl = urlData.publicUrl;
-      
-      // 3.3 Insert metadata into 'memories_table'
-      const { data: insertData, error: insertError } = await supabase
-        .from('memories_table')
-        .insert([{ 
-          image_url: imageUrl, 
-          caption: caption,
-          created_at: new Date()
-        }]);
-      
-      if (insertError) throw insertError;
-      
-      // Success!
-      showTemporaryMessage("✅ saved! now syncs everywhere 💕", "#2a9d8f");
-      
-      // Reset form & preview
-      captionInput.value = '';
-      resetPreview();
-      
-      // Reload the gallery (will show new photo on all devices)
-      await loadMemories();
-      
-    } catch (err) {
-      console.error('UPLOAD ERROR:', err);
-      let errorMsg = err.message || 'something went wrong';
-      if (errorMsg.includes('bucket') || errorMsg.includes('storage')) {
-        errorMsg = 'storage bucket "memories" missing or not public. create it in supabase dashboard.';
-      } else if (errorMsg.includes('relation') || errorMsg.includes('table')) {
-        errorMsg = 'database table "memories_table" missing. create table with columns: id, image_url, caption, created_at';
+    // File preview
+    document.getElementById('testImage').addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        selectedFile = e.target.files[0];
+        const previewDiv = document.getElementById('previewArea');
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          previewDiv.innerHTML = `<img src="${ev.target.result}" class="preview" alt="preview">`;
+        };
+        reader.readAsDataURL(selectedFile);
+        document.getElementById('testUploadBtn').disabled = false;
+      } else {
+        selectedFile = null;
+        document.getElementById('previewArea').innerHTML = '';
+        document.getElementById('testUploadBtn').disabled = true;
       }
-      showTemporaryMessage(`❌ upload failed: ${errorMsg}`, "#c46a4a");
-    } finally {
-      uploadBtn.disabled = false;
-      uploadBtn.textContent = '💾 save moment';
-    }
-  }
-  
-  // ========== HELPER: FILE PREVIEW & RESET ==========
-  function handleFileSelect(file) {
-    if (!file) return false;
-    if (!file.type.startsWith('image/')) {
-      showTemporaryMessage("💔 please select an image (jpg, png, webp)", "#b15e3e");
-      return false;
-    }
-    if (file.size > 8 * 1024 * 1024) {
-      showTemporaryMessage("📦 image too large (max 8MB)", "#b15e3e");
-      return false;
-    }
-    if (currentPreviewUrl) URL.revokeObjectURL(currentPreviewUrl);
-    
-    const previewUrl = URL.createObjectURL(file);
-    currentPreviewUrl = previewUrl;
-    currentFile = file;
-    previewContainer.innerHTML = `<img class="preview-thumbnail" src="${previewUrl}" alt="preview">`;
-    return true;
-  }
-  
-  function resetPreview() {
-    if (currentPreviewUrl) {
-      URL.revokeObjectURL(currentPreviewUrl);
-      currentPreviewUrl = null;
-    }
-    currentFile = null;
-    previewContainer.innerHTML = '';
-    fileInput.value = '';
-  }
-  
-  function showTemporaryMessage(msg, bgColor) {
-    const existing = document.querySelector('.romantic-toast');
-    if (existing) existing.remove();
-    const toast = document.createElement('div');
-    toast.className = 'romantic-toast';
-    toast.innerText = msg;
-    toast.style.backgroundColor = bgColor + 'e6';
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2800);
-  }
-  
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
     });
-  }
+    
+    document.getElementById('testUploadBtn').addEventListener('click', testUpload);
+    document.getElementById('refreshGalleryBtn').addEventListener('click', loadGallery);
+    
+    // Run connection test on page load
+    testConnection();
+  </script>
   
-  // ========== EVENT LISTENERS ==========
-  fileInput.addEventListener('change', (e) => {
-    if (e.target.files && e.target.files.length) {
-      handleFileSelect(e.target.files[0]);
-    } else {
-      resetPreview();
-    }
-  });
-  
-  uploadBtn.addEventListener('click', uploadMemory);
-  
-  captionInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      uploadMemory();
-    }
-  });
-  
-  // ========== INITIAL LOAD ==========
-  loadMemories();
-  
-  // Cleanup preview URL before page unload
-  window.addEventListener('beforeunload', () => {
-    if (currentPreviewUrl) URL.revokeObjectURL(currentPreviewUrl);
-  });
-  
-  // optional: realtime listener for changes across devices (auto-refresh when new photo added elsewhere)
-  supabase
-    .channel('memories_changes')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'memories_table' }, (payload) => {
-      console.log('Realtime update detected, refreshing gallery...', payload);
-      loadMemories();
-    })
-    .subscribe();
-</script>
+  <div class="card" style="margin-top: 1rem;">
+    <h2>📋 What To Do Next</h2>
+    <ul style="margin-left: 1.5rem; line-height: 1.6;">
+      <li><strong>If you see ❌ TABLE ERROR:</strong> Go to Supabase → Table Editor → Create table named <code>memories_table</code> with columns: id (int8, primary key, auto increment), image_url (text), caption (text), created_at (timestamptz, default now())</li>
+      <li><strong>If you see ❌ BUCKET ERROR:</strong> Go to Supabase → Storage → Create bucket named <code>memories</code> → Make it <strong>PUBLIC</strong></li>
+      <li><strong>If you see permission errors:</strong> Turn OFF Row Level Security (RLS) temporarily for testing, or add policies</li>
+      <li><strong>After fixing issues:</strong> Click "Refresh Gallery" and try uploading again</li>
+    </ul>
+  </div>
 </body>
 </html>
