@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Our Memory Lane ✨ – Couple's Photo Gallery</title>
   <style>
-    /* ---------- CSS RESET & GLOBAL ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -21,14 +20,12 @@
       min-height: 100vh;
     }
 
-    /* main app container */
     .love-container {
       max-width: 1300px;
       margin: 0 auto;
       position: relative;
     }
 
-    /* ========== HEADER + ROMANTIC DECORATIONS ========== */
     .romance-header {
       text-align: center;
       margin-bottom: 2.8rem;
@@ -63,7 +60,6 @@
       color: transparent;
       letter-spacing: -0.3px;
       font-weight: 700;
-      text-shadow: 0 2px 5px rgba(255, 215, 190, 0.5);
     }
 
     .tagline {
@@ -76,10 +72,8 @@
       border-radius: 60px;
       backdrop-filter: blur(3px);
       margin-top: 0.6rem;
-      letter-spacing: 0.3px;
     }
 
-    /* ========== UPLOAD CARD (GLASS + WARM) ========== */
     .upload-memory-card {
       background: rgba(255, 250, 245, 0.92);
       backdrop-filter: blur(4px);
@@ -87,7 +81,6 @@
       box-shadow: 0 25px 40px -16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(250, 200, 170, 0.4);
       padding: 1.6rem 2rem;
       margin-bottom: 3rem;
-      transition: all 0.25s ease;
     }
 
     .upload-flex {
@@ -110,13 +103,11 @@
       gap: 8px;
       font-weight: 600;
       color: #b56443;
-      font-size: 0.95rem;
     }
 
     .photo-selector:hover {
       background: #ffe2d4;
       border-color: #ce8464;
-      transform: translateY(-1px);
     }
 
     input[type="file"] {
@@ -130,8 +121,6 @@
       border-radius: 22px;
       object-fit: cover;
       border: 2px solid #ffcfb5;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-      transition: 0.2s;
     }
 
     .memory-caption-field {
@@ -147,22 +136,12 @@
       border-radius: 70px;
       font-size: 0.95rem;
       font-family: inherit;
-      font-weight: 500;
-      color: #3f2a1e;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), inset 0 0 0 1px #f3cfbb;
-      transition: 0.2s;
+      box-shadow: inset 0 0 0 1px #f3cfbb;
     }
 
     .memory-caption-field input:focus {
       outline: none;
       box-shadow: 0 0 0 3px #ffbe9e66, inset 0 0 0 1px #dd9a7a;
-      background: white;
-    }
-
-    .memory-caption-field input::placeholder {
-      color: #cfaa95;
-      font-weight: 400;
-      font-size: 0.9rem;
     }
 
     .btn-love-upload {
@@ -177,19 +156,11 @@
       font-family: inherit;
       transition: 0.2s;
       box-shadow: 0 8px 18px rgba(214, 105, 65, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .btn-love-upload:hover {
       background: #cf6847;
       transform: translateY(-2px);
-      box-shadow: 0 12px 20px rgba(200, 90, 50, 0.25);
-    }
-
-    .btn-love-upload:active {
-      transform: translateY(1px);
     }
 
     .info-note {
@@ -197,12 +168,8 @@
       text-align: center;
       margin-top: 1rem;
       color: #c59379;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
     }
 
-    /* ========== GALLERY HEADER ========== */
     .gallery-head {
       display: flex;
       justify-content: space-between;
@@ -220,7 +187,6 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.2px;
     }
 
     .counter-badge {
@@ -230,31 +196,25 @@
       font-size: 0.85rem;
       font-weight: 600;
       color: #bc7659;
-      box-shadow: inset 0 0 0 1px #ffd5be;
     }
 
-    /* ========== MEMORY GRID (RESPONSIVE, WARM) ========== */
     .memories-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1.8rem;
     }
 
-    /* memory card styles */
     .memory-card {
       background: white;
       border-radius: 1.8rem;
       overflow: hidden;
       box-shadow: 0 16px 28px -12px rgba(0, 0, 0, 0.1);
-      transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+      transition: all 0.25s;
       border: 1px solid #fff0e5;
-      backdrop-filter: blur(0px);
     }
 
     .memory-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 28px 34px -14px rgba(102, 51, 30, 0.2);
-      border-color: #ffe0cf;
     }
 
     .card-image {
@@ -262,12 +222,7 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       background: #faeadf;
-      transition: transform 0.4s ease;
       display: block;
-    }
-
-    .memory-card:hover .card-image {
-      transform: scale(1.02);
     }
 
     .card-content {
@@ -281,25 +236,12 @@
       color: #543a2b;
       word-break: break-word;
       margin-bottom: 0.3rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .memory-caption:before {
-      content: "📎";
-      font-size: 0.8rem;
-      opacity: 0.7;
     }
 
     .memory-date {
       font-size: 0.7rem;
       color: #be8d73;
-      display: flex;
-      align-items: center;
-      gap: 6px;
       margin: 0.4rem 0 0.8rem 0;
-      letter-spacing: 0.2px;
     }
 
     .delete-memory {
@@ -311,20 +253,14 @@
       cursor: pointer;
       padding: 0.3rem 0.8rem;
       border-radius: 40px;
-      transition: 0.15s;
       background: #fff1e9;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
     }
 
     .delete-memory:hover {
       background: #ffded0;
       color: #bc5d39;
-      transform: scale(0.98);
     }
 
-    /* empty state with love */
     .empty-grace {
       grid-column: 1 / -1;
       text-align: center;
@@ -333,11 +269,9 @@
       padding: 3rem;
       color: #c79273;
       font-size: 1.1rem;
-      font-weight: 500;
       border: 2px dashed #ffd2bc;
     }
 
-    /* footer romantic */
     .footer-love {
       text-align: center;
       margin-top: 3.8rem;
@@ -345,13 +279,8 @@
       color: #cfab95;
       border-top: 2px solid #ffeadc;
       padding-top: 1.8rem;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
     }
 
-    /* floating toast (custom notifications) */
     .romantic-toast {
       position: fixed;
       bottom: 28px;
@@ -362,13 +291,8 @@
       color: white;
       padding: 0.7rem 1.6rem;
       border-radius: 60px;
-      font-weight: 500;
       font-size: 0.85rem;
       z-index: 1000;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      pointer-events: none;
-      font-family: monospace;
-      letter-spacing: 0.4px;
       animation: fadeSlideUp 0.2s ease;
     }
 
@@ -383,90 +307,11 @@
       }
     }
 
-    /* ========== RESPONSIVE DESIGN (MOBILE FIRST LOVE) ========== */
     @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-      .romance-header h1 {
-        font-size: 2rem;
-      }
-      .heart-icon {
-        font-size: 1.4rem;
-      }
-      .tagline {
-        font-size: 0.85rem;
-      }
-      .upload-flex {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn-love-upload {
-        justify-content: center;
-      }
-      .gallery-head h2 {
-        font-size: 1.5rem;
-      }
-      .counter-badge {
-        font-size: 0.75rem;
-      }
-      .memory-caption {
-        font-size: 0.95rem;
-      }
-      .memories-grid {
-        gap: 1.2rem;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
-      .upload-memory-card {
-        padding: 1.2rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .memories-grid {
-        grid-template-columns: 1fr;
-      }
-      .card-content {
-        padding: 0.8rem;
-      }
-      .romance-header h1 {
-        font-size: 1.8rem;
-      }
-      .heart-divider {
-        gap: 0.4rem;
-      }
-      .footer-love {
-        font-size: 0.65rem;
-      }
-    }
-
-    /* optional smooth scroll & selection */
-    ::selection {
-      background: #fadbcb;
-      color: #8b4d32;
-    }
-
-    /* subtle image loading effect */
-    .card-image {
-      background: #f7e3d8;
-    }
-
-    /* button focus accessibility */
-    .btn-love-upload:focus-visible,
-    .photo-selector:focus-visible,
-    .delete-memory:focus-visible {
-      outline: 3px solid #e4815f;
-      outline-offset: 2px;
-    }
-
-    /* hover glow for upload card */
-    .upload-memory-card:hover {
-      box-shadow: 0 28px 40px -18px rgba(0, 0, 0, 0.15);
-    }
-
-    /* memory date icon */
-    .memory-date span {
-      opacity: 0.8;
+      body { padding: 1rem; }
+      .romance-header h1 { font-size: 2rem; }
+      .upload-flex { flex-direction: column; align-items: stretch; }
+      .memories-grid { gap: 1.2rem; }
     }
   </style>
 </head>
@@ -482,7 +327,6 @@
     <div class="tagline">✧ every photo becomes a forever memory ✧</div>
   </div>
 
-  <!-- Upload section with romantic styling -->
   <div class="upload-memory-card">
     <div class="upload-flex">
       <label class="photo-selector">
@@ -496,267 +340,249 @@
       <button class="btn-love-upload" id="uploadBtn">💾 save moment</button>
     </div>
     <div class="info-note">
-      <span>⭐ our private gallery — photos live in your heart & browser (local storage)</span>
+      <span>☁️ photos sync across all your devices — saved to the cloud</span>
     </div>
   </div>
 
-  <!-- Gallery header + counter -->
   <div class="gallery-head">
     <h2>💞 our memories</h2>
     <div class="counter-badge" id="photoCounter">0 memories</div>
   </div>
 
-  <!-- dynamic gallery grid -->
   <div class="memories-grid" id="galleryGrid">
     <div class="empty-grace">✨ no memories yet — upload your first photo together ✨</div>
   </div>
 
   <div class="footer-love">
-    <span>💖 every upload lives here forever — just for the two of us</span>
-    <span>✦ stored with love in your browser ✦</span>
+    <span>💖 every upload syncs everywhere — just for the two of us</span>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // ---------- DATA MODEL ----------
-  // Each memory object: { id, imageDataUrl, caption, timestamp }
-  let memoriesArray = [];
-
-  // DOM elements
-  const fileInput = document.getElementById('imageUploadInput');
-  const captionInput = document.getElementById('photoCaption');
-  const uploadBtn = document.getElementById('uploadBtn');
-  const galleryGrid = document.getElementById('galleryGrid');
-  const photoCounterSpan = document.getElementById('photoCounter');
-  const previewContainer = document.getElementById('previewThumb');
-
-  let currentPreviewUrl = null;   // for preview display (revoke later)
-  let currentFile = null;          // hold selected file
-
-  // Load saved data from localStorage
-  function loadFromLocalStorage() {
-    const stored = localStorage.getItem('our_love_gallery');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          memoriesArray = parsed;
-        } else {
-          memoriesArray = [];
+    // YOUR SUPABASE CONNECTION — REPLACE WITH YOUR ACTUAL KEYS!
+    const SUPABASE_URL = 'https://ukxhoqfqvusoloefnkkj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVreGhvcWZxdnVzb2xvZWZua2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5NjgyOTgsImV4cCI6MjA5NTU0NDI5OH0.cX4VNJqfxpHEzXiAtgwGzfCWAs3Wpa1P6N2fYZFdQrw';
+    
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    // DOM elements
+    const fileInput = document.getElementById('imageUploadInput');
+    const captionInput = document.getElementById('photoCaption');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const galleryGrid = document.getElementById('galleryGrid');
+    const photoCounterSpan = document.getElementById('photoCounter');
+    const previewContainer = document.getElementById('previewThumb');
+    
+    let currentPreviewUrl = null;
+    let currentFile = null;
+    
+    // Load memories from Supabase
+    async function loadMemories() {
+        galleryGrid.innerHTML = '<div class="empty-grace">💕 Loading your memories...</div>';
+        
+        try {
+            const { data, error } = await supabase
+                .from('memories_table')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) throw error;
+            
+            if (!data || data.length === 0) {
+                galleryGrid.innerHTML = '<div class="empty-grace">🌸 no memories yet — upload your first photo together 🌸</div>';
+                photoCounterSpan.innerText = '0 memories';
+                return;
+            }
+            
+            let cardsHtml = '';
+            for (let mem of data) {
+                const safeCaption = escapeHtml(mem.caption) || '💌 untitled memory';
+                const date = new Date(mem.created_at);
+                const formattedTime = date.toLocaleDateString() + ' at ' + date.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
+                
+                cardsHtml += `
+                    <div class="memory-card" data-id="${mem.id}">
+                        <img class="card-image" src="${mem.image_url}" alt="memory photo" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Image+Error'">
+                        <div class="card-content">
+                            <div class="memory-caption">${safeCaption}</div>
+                            <div class="memory-date">🕊️ ${formattedTime}</div>
+                            <button class="delete-memory" data-id="${mem.id}">🧡 remove memory</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            galleryGrid.innerHTML = cardsHtml;
+            photoCounterSpan.innerText = `${data.length} ${data.length === 1 ? 'memory' : 'memories'}`;
+            
+            // Attach delete handlers
+            document.querySelectorAll('.delete-memory').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = btn.getAttribute('data-id');
+                    await deleteMemoryById(id);
+                });
+            });
+            
+        } catch (error) {
+            console.error('Load error:', error);
+            galleryGrid.innerHTML = '<div class="empty-grace">❌ Error loading memories. Make sure your Supabase table is set up!</div>';
         }
-      } catch(e) { memoriesArray = []; }
-    } else {
-      memoriesArray = [];
     }
-    renderGallery();
-  }
-
-  // Save to localStorage
-  function persistMemories() {
-    localStorage.setItem('our_love_gallery', JSON.stringify(memoriesArray));
-  }
-
-  // Helper: format date nicely
-  function formatDate(timestamp) {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) + ' at ' + 
-           date.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
-  }
-
-  // Render all cards from memoriesArray
-  function renderGallery() {
-    if (!galleryGrid) return;
-    if (!memoriesArray.length) {
-      galleryGrid.innerHTML = `<div class="empty-grace">🌸 no memories yet — upload your first photo together 🌸</div>`;
-      photoCounterSpan.innerText = `0 memories`;
-      return;
+    
+    async function deleteMemoryById(id) {
+        try {
+            const { error } = await supabase
+                .from('memories_table')
+                .delete()
+                .eq('id', id);
+            
+            if (error) throw error;
+            
+            showTemporaryMessage("🗑️ memory removed", "#c46a4a");
+            loadMemories(); // Reload the gallery
+        } catch (error) {
+            console.error('Delete error:', error);
+            showTemporaryMessage("❌ Could not delete", "#c46a4a");
+        }
     }
-
-    // sort by newest first (newest timestamp on top)
-    const sorted = [...memoriesArray].sort((a,b) => b.timestamp - a.timestamp);
-    let cardsHtml = '';
-    for (let mem of sorted) {
-      const safeCaption = escapeHtml(mem.caption) || '💌 untitled memory';
-      const formattedTime = formatDate(mem.timestamp);
-      cardsHtml += `
-        <div class="memory-card" data-id="${mem.id}">
-          <img class="card-image" src="${mem.imageDataUrl}" alt="memory photo" loading="lazy">
-          <div class="card-content">
-            <div class="memory-caption">${safeCaption}</div>
-            <div class="memory-date">
-              <span>🕊️</span> ${formattedTime}
-            </div>
-            <button class="delete-memory" data-id="${mem.id}">
-              🧡 remove memory
-            </button>
-          </div>
-        </div>
-      `;
+    
+    async function uploadMemory() {
+        if (!currentFile) {
+            showTemporaryMessage("✨ first, choose a lovely photo ✨", "#c07a5c");
+            return;
+        }
+        
+        const caption = captionInput.value.trim() || "💖 a sweet memory";
+        
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = 'Uploading...';
+        showTemporaryMessage("☁️ Uploading to the cloud...", "#e4815f");
+        
+        try {
+            // Step 1: Upload image to Supabase Storage
+            const fileExt = currentFile.name.split('.').pop();
+            const fileName = `${Date.now()}.${fileExt}`;
+            const filePath = `public/${fileName}`;
+            
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('memories')
+                .upload(filePath, currentFile);
+            
+            if (uploadError) throw uploadError;
+            
+            // Step 2: Get public URL
+            const { data: urlData } = supabase.storage
+                .from('memories')
+                .getPublicUrl(filePath);
+            
+            const imageUrl = urlData.publicUrl;
+            
+            // Step 3: Save to database
+            const { data: insertData, error: insertError } = await supabase
+                .from('memories_table')
+                .insert([{ image_url: imageUrl, caption: caption }]);
+            
+            if (insertError) throw insertError;
+            
+            showTemporaryMessage("✅ Photo saved! Syncs everywhere 💕", "#2a9d8f");
+            
+            // Reset form
+            captionInput.value = '';
+            resetPreview();
+            
+            // Reload gallery
+            loadMemories();
+            
+        } catch (error) {
+            console.error('Upload error:', error);
+            showTemporaryMessage("❌ Error saving. Check your bucket & table!", "#c46a4a");
+        } finally {
+            uploadBtn.disabled = false;
+            uploadBtn.textContent = '💾 save moment';
+        }
     }
-    galleryGrid.innerHTML = cardsHtml;
-    photoCounterSpan.innerText = `${memoriesArray.length} ${memoriesArray.length === 1 ? 'memory' : 'memories'}`;
-
-    // attach delete events dynamically
-    document.querySelectorAll('.delete-memory').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const id = btn.getAttribute('data-id');
-        if (id) deleteMemoryById(id);
-      });
+    
+    function handleFileSelect(file) {
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+            showTemporaryMessage("💔 please select an image", "#b15e3e");
+            return false;
+        }
+        if (file.size > 8 * 1024 * 1024) {
+            showTemporaryMessage("📦 image too large (max 8MB)", "#b15e3e");
+            return false;
+        }
+        
+        if (currentPreviewUrl) {
+            URL.revokeObjectURL(currentPreviewUrl);
+        }
+        
+        const previewUrl = URL.createObjectURL(file);
+        currentPreviewUrl = previewUrl;
+        currentFile = file;
+        previewContainer.innerHTML = `<img class="preview-thumbnail" src="${previewUrl}" alt="preview">`;
+        return true;
+    }
+    
+    function resetPreview() {
+        if (currentPreviewUrl) {
+            URL.revokeObjectURL(currentPreviewUrl);
+            currentPreviewUrl = null;
+        }
+        currentFile = null;
+        previewContainer.innerHTML = '';
+        fileInput.value = '';
+    }
+    
+    function showTemporaryMessage(msg, bgColor) {
+        let toast = document.querySelector('.romantic-toast');
+        if (toast) toast.remove();
+        const div = document.createElement('div');
+        div.className = 'romantic-toast';
+        div.innerText = msg;
+        div.style.backgroundColor = bgColor + 'e6';
+        document.body.appendChild(div);
+        setTimeout(() => { if (div) div.remove(); }, 2500);
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+    
+    // Event listeners
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            handleFileSelect(e.target.files[0]);
+        } else {
+            resetPreview();
+        }
     });
-  }
-
-  // simple escape to avoid XSS
-  function escapeHtml(str) {
-    if (!str) return '';
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-      return c;
+    
+    uploadBtn.addEventListener('click', uploadMemory);
+    
+    captionInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            uploadMemory();
+        }
     });
-  }
-
-  // delete memory
-  function deleteMemoryById(id) {
-    const newMemories = memoriesArray.filter(mem => mem.id !== id);
-    if (newMemories.length === memoriesArray.length) return;
-    memoriesArray = newMemories;
-    persistMemories();
-    renderGallery();
-    showTemporaryMessage("🗑️ memory removed", "#c46a4a");
-  }
-
-  // small floating/toast msg
-  function showTemporaryMessage(msg, bgColor = "#d98967") {
-    let toast = document.querySelector('.romantic-toast');
-    if(toast) toast.remove();
-    const div = document.createElement('div');
-    div.className = 'romantic-toast';
-    div.innerText = msg;
-    div.style.backgroundColor = bgColor;
-    document.body.appendChild(div);
-    setTimeout(() => { if(div) div.remove(); }, 2200);
-  }
-
-  // add new memory from image dataUrl + caption
-  function addNewMemory(imageDataUrl, caption) {
-    if (!imageDataUrl) {
-      showTemporaryMessage("⚠️ please select an image first", "#bb6b4b");
-      return false;
-    }
-    const newId = Date.now().toString() + '-' + Math.random().toString(36).substring(2, 8);
-    const newMemory = {
-      id: newId,
-      imageDataUrl: imageDataUrl,
-      caption: caption.trim() || "💕 our moment",
-      timestamp: Date.now()
-    };
-    memoriesArray.unshift(newMemory);
-    persistMemories();
-    renderGallery();
-    return true;
-  }
-
-  // handle file selection and preview
-  function handleFileSelect(file) {
-    if (!file) return;
-    if (!file.type.startsWith('image/')) {
-      showTemporaryMessage("💔 please select an image (jpg, png, etc)", "#b15e3e");
-      return false;
-    }
-    if (file.size > 8 * 1024 * 1024) {
-      showTemporaryMessage("📦 image too large (max 8MB)", "#b15e3e");
-      return false;
-    }
-    if (currentPreviewUrl) {
-      URL.revokeObjectURL(currentPreviewUrl);
-      currentPreviewUrl = null;
-    }
-    const previewUrl = URL.createObjectURL(file);
-    currentPreviewUrl = previewUrl;
-    currentFile = file;
-
-    previewContainer.innerHTML = `<img class="preview-thumbnail" src="${previewUrl}" alt="preview">`;
-    return true;
-  }
-
-  fileInput.addEventListener('change', (e) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      handleFileSelect(files[0]);
-    } else {
-      resetPreview();
-    }
-  });
-
-  function resetPreview() {
-    if (currentPreviewUrl) {
-      URL.revokeObjectURL(currentPreviewUrl);
-      currentPreviewUrl = null;
-    }
-    currentFile = null;
-    previewContainer.innerHTML = '';
-    fileInput.value = '';
-  }
-
-  // Upload action: read file as dataURL and store
-  async function uploadCurrentPhoto() {
-    if (!currentFile && !currentPreviewUrl) {
-      showTemporaryMessage("✨ first, choose a lovely photo ✨", "#c07a5c");
-      return;
-    }
-    if (!currentFile) {
-      showTemporaryMessage("📸 select an image file", "#b86b4a");
-      return;
-    }
-    const caption = captionInput.value.trim() === "" ? "💖 a sweet memory" : captionInput.value.trim();
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const dataUrl = event.target.result;
-      const success = addNewMemory(dataUrl, caption);
-      if (success) {
-        captionInput.value = '';
-        resetPreview();
-        showTemporaryMessage("🧡 photo saved! forever ours", "#d47a58");
-      } else {
-        showTemporaryMessage("⚠️ something went wrong", "#b35c3a");
-      }
-    };
-    reader.onerror = () => {
-      showTemporaryMessage("failed to read image", "#b84a2a");
-    };
-    reader.readAsDataURL(currentFile);
-  }
-
-  uploadBtn.addEventListener('click', uploadCurrentPhoto);
-
-  captionInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      uploadCurrentPhoto();
-    }
-  });
-
-  // load initial data
-  loadFromLocalStorage();
-
-  // handle storage event (sync across tabs)
-  window.addEventListener('storage', (e) => {
-    if (e.key === 'our_love_gallery') {
-      loadFromLocalStorage();
-      resetPreview();
-    }
-  });
-
-  // optional: clear preview before unload
-  window.addEventListener('beforeunload', () => {
-    if (currentPreviewUrl) {
-      URL.revokeObjectURL(currentPreviewUrl);
-    }
-  });
+    
+    // Load memories on page load
+    loadMemories();
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+        if (currentPreviewUrl) {
+            URL.revokeObjectURL(currentPreviewUrl);
+        }
+    });
 </script>
 </body>
 </html>
