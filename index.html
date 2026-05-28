@@ -360,227 +360,56 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-    // YOUR SUPABASE CONNECTION — REPLACE WITH YOUR ACTUAL KEYS!
     const SUPABASE_URL = 'https://ukxhoqfqvusoloefnkkj.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVreGhvcWZxdnVzb2xvZWZua2tqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5NjgyOTgsImV4cCI6MjA5NTU0NDI5OH0.cX4VNJqfxpHEzXiAtgwGzfCWAs3Wpa1P6N2fYZFdQrw';
     
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     
-    // DOM elements
-    const fileInput = document.getElementById('imageUploadInput');
-    const captionInput = document.getElementById('photoCaption');
-    const uploadBtn = document.getElementById('uploadBtn');
-    const galleryGrid = document.getElementById('galleryGrid');
-    const photoCounterSpan = document.getElementById('photoCounter');
-    const previewContainer = document.getElementById('previewThumb');
-    
-    let currentPreviewUrl = null;
-    let currentFile = null;
-    
-    // Load memories from Supabase
-    async function loadMemories() {
-        galleryGrid.innerHTML = '<div class="empty-grace">💕 Loading your memories...</div>';
+    // Test the connection immediately
+    async function testConnection() {
+        console.log("Testing Supabase connection...");
         
-        try {
-            const { data, error } = await supabase
-                .from('memories_table')
-                .select('*')
-                .order('created_at', { ascending: false });
-            
-            if (error) throw error;
-            
-            if (!data || data.length === 0) {
-                galleryGrid.innerHTML = '<div class="empty-grace">🌸 no memories yet — upload your first photo together 🌸</div>';
-                photoCounterSpan.innerText = '0 memories';
-                return;
-            }
-            
-            let cardsHtml = '';
-            for (let mem of data) {
-                const safeCaption = escapeHtml(mem.caption) || '💌 untitled memory';
-                const date = new Date(mem.created_at);
-                const formattedTime = date.toLocaleDateString() + ' at ' + date.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
-                
-                cardsHtml += `
-                    <div class="memory-card" data-id="${mem.id}">
-                        <img class="card-image" src="${mem.image_url}" alt="memory photo" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=Image+Error'">
-                        <div class="card-content">
-                            <div class="memory-caption">${safeCaption}</div>
-                            <div class="memory-date">🕊️ ${formattedTime}</div>
-                            <button class="delete-memory" data-id="${mem.id}">🧡 remove memory</button>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            galleryGrid.innerHTML = cardsHtml;
-            photoCounterSpan.innerText = `${data.length} ${data.length === 1 ? 'memory' : 'memories'}`;
-            
-            // Attach delete handlers
-            document.querySelectorAll('.delete-memory').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const id = btn.getAttribute('data-id');
-                    await deleteMemoryById(id);
-                });
-            });
-            
-        } catch (error) {
-            console.error('Load error:', error);
-            galleryGrid.innerHTML = '<div class="empty-grace">❌ Error loading memories. Make sure your Supabase table is set up!</div>';
-        }
-    }
-    
-    async function deleteMemoryById(id) {
-        try {
-            const { error } = await supabase
-                .from('memories_table')
-                .delete()
-                .eq('id', id);
-            
-            if (error) throw error;
-            
-            showTemporaryMessage("🗑️ memory removed", "#c46a4a");
-            loadMemories(); // Reload the gallery
-        } catch (error) {
-            console.error('Delete error:', error);
-            showTemporaryMessage("❌ Could not delete", "#c46a4a");
-        }
-    }
-    
-    async function uploadMemory() {
-        if (!currentFile) {
-            showTemporaryMessage("✨ first, choose a lovely photo ✨", "#c07a5c");
-            return;
-        }
+        // Test 1: Can we access the table?
+        const { data, error } = await supabase.from('memories_table').select('count');
         
-        const caption = captionInput.value.trim() || "💖 a sweet memory";
-        
-        uploadBtn.disabled = true;
-        uploadBtn.textContent = 'Uploading...';
-        showTemporaryMessage("☁️ Uploading to the cloud...", "#e4815f");
-        
-        try {
-            // Step 1: Upload image to Supabase Storage
-            const fileExt = currentFile.name.split('.').pop();
-            const fileName = `${Date.now()}.${fileExt}`;
-            const filePath = `public/${fileName}`;
-            
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('memories')
-                .upload(filePath, currentFile);
-            
-            if (uploadError) throw uploadError;
-            
-            // Step 2: Get public URL
-            const { data: urlData } = supabase.storage
-                .from('memories')
-                .getPublicUrl(filePath);
-            
-            const imageUrl = urlData.publicUrl;
-            
-            // Step 3: Save to database
-            const { data: insertData, error: insertError } = await supabase
-                .from('memories_table')
-                .insert([{ image_url: imageUrl, caption: caption }]);
-            
-            if (insertError) throw insertError;
-            
-            showTemporaryMessage("✅ Photo saved! Syncs everywhere 💕", "#2a9d8f");
-            
-            // Reset form
-            captionInput.value = '';
-            resetPreview();
-            
-            // Reload gallery
-            loadMemories();
-            
-        } catch (error) {
-            console.error('Upload error:', error);
-            showTemporaryMessage("❌ Error saving. Check your bucket & table!", "#c46a4a");
-        } finally {
-            uploadBtn.disabled = false;
-            uploadBtn.textContent = '💾 save moment';
-        }
-    }
-    
-    function handleFileSelect(file) {
-        if (!file) return;
-        if (!file.type.startsWith('image/')) {
-            showTemporaryMessage("💔 please select an image", "#b15e3e");
-            return false;
-        }
-        if (file.size > 8 * 1024 * 1024) {
-            showTemporaryMessage("📦 image too large (max 8MB)", "#b15e3e");
+        if (error) {
+            console.error("❌ TABLE ERROR:", error);
+            document.getElementById('galleryGrid').innerHTML = 
+                `<div class="empty-grace">❌ Table error: ${error.message}<br><br>Make sure your table is named 'memories_table'</div>`;
             return false;
         }
         
-        if (currentPreviewUrl) {
-            URL.revokeObjectURL(currentPreviewUrl);
+        console.log("✅ Table connected!");
+        
+        // Test 2: Can we access storage?
+        const { data: buckets, error: bucketError } = await supabase.storage.listBuckets();
+        
+        if (bucketError) {
+            console.error("❌ STORAGE ERROR:", bucketError);
+            document.getElementById('galleryGrid').innerHTML = 
+                `<div class="empty-grace">❌ Storage error: ${bucketError.message}<br><br>Make sure your bucket is named 'memories'</div>`;
+            return false;
         }
         
-        const previewUrl = URL.createObjectURL(file);
-        currentPreviewUrl = previewUrl;
-        currentFile = file;
-        previewContainer.innerHTML = `<img class="preview-thumbnail" src="${previewUrl}" alt="preview">`;
+        const hasMemoriesBucket = buckets?.some(b => b.name === 'memories');
+        if (!hasMemoriesBucket) {
+            console.error("❌ Bucket 'memories' not found!");
+            document.getElementById('galleryGrid').innerHTML = 
+                `<div class="empty-grace">❌ Bucket 'memories' not found! Create it in Supabase Storage.</div>`;
+            return false;
+        }
+        
+        console.log("✅ Storage connected!");
         return true;
     }
     
-    function resetPreview() {
-        if (currentPreviewUrl) {
-            URL.revokeObjectURL(currentPreviewUrl);
-            currentPreviewUrl = null;
-        }
-        currentFile = null;
-        previewContainer.innerHTML = '';
-        fileInput.value = '';
-    }
+    // Rest of your code here...
+    // (keep the rest of the functions from before)
     
-    function showTemporaryMessage(msg, bgColor) {
-        let toast = document.querySelector('.romantic-toast');
-        if (toast) toast.remove();
-        const div = document.createElement('div');
-        div.className = 'romantic-toast';
-        div.innerText = msg;
-        div.style.backgroundColor = bgColor + 'e6';
-        document.body.appendChild(div);
-        setTimeout(() => { if (div) div.remove(); }, 2500);
-    }
-    
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-    
-    // Event listeners
-    fileInput.addEventListener('change', (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            handleFileSelect(e.target.files[0]);
-        } else {
-            resetPreview();
-        }
-    });
-    
-    uploadBtn.addEventListener('click', uploadMemory);
-    
-    captionInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            uploadMemory();
-        }
-    });
-    
-    // Load memories on page load
-    loadMemories();
-    
-    // Clean up on page unload
-    window.addEventListener('beforeunload', () => {
-        if (currentPreviewUrl) {
-            URL.revokeObjectURL(currentPreviewUrl);
+    // Run test on load
+    testConnection().then(connected => {
+        if (connected) {
+            loadMemories();
         }
     });
 </script>
